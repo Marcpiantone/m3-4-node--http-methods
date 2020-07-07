@@ -1,5 +1,4 @@
-const { customers } = require("./data/promo");
-const { stock } = require("./data/promo");
+const { stock, customers } = require("./data/promo");
 
 //FIRST : Check for email already in database
 const emailExists = (info) => {
@@ -64,6 +63,7 @@ const countryIsCanada = (info) => {
     if (country.toLowerCase() === "canada") {
       return true;
     } else {
+      console.log("Country is not Canada");
       return false;
     }
   }
@@ -83,9 +83,13 @@ const exists = (info) => {
 const inStock = (info) => {
   // Extract the right data from the body
   const { order, size } = info;
-
-  // For loop to check if our info is in stock
-  return true;
+  console.log(stock[`${order}`]);
+  if (stock[`${order}`] > 0 || stock[`${order}`][`${size}`] > 0) {
+    return true;
+  } else {
+    console.log("Item is not available");
+    return false;
+  }
 };
 
 // Function exists to check all of our parameters
@@ -99,4 +103,4 @@ const validate = (info) => {
 
 // Export functions
 
-module.exports = { validate, exists, countryIsCanada };
+module.exports = { validate, exists, countryIsCanada, inStock };

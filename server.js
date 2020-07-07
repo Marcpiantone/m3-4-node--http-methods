@@ -29,6 +29,7 @@ express()
     const infoValidation = validations.validate(info);
     const existsValidation = validations.exists(info);
     const countryValidation = validations.countryIsCanada(info);
+    const inStockValidation = validations.inStock(info);
 
     console.log(info);
 
@@ -45,6 +46,11 @@ express()
         res.send({
           status: "error",
           error: "undeliverable",
+        });
+      if (inStockValidation === false)
+        res.send({
+          status: "error",
+          error: "unavailable",
         });
     }
   })
