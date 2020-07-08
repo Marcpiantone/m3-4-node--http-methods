@@ -83,7 +83,6 @@ const exists = (info) => {
 const inStock = (info) => {
   // Extract the right data from the body
   const { order, size } = info;
-  console.log(stock[`${order}`]);
   if (stock[`${order}`] > 0 || stock[`${order}`][`${size}`] > 0) {
     return true;
   } else {

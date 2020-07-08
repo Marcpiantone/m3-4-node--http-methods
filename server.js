@@ -26,16 +26,20 @@ express()
 
   .post("/order", (req, res) => {
     let info = req.body;
+    const { givenName, order, province } = info;
     const infoValidation = validations.validate(info);
     const existsValidation = validations.exists(info);
     const countryValidation = validations.countryIsCanada(info);
     const inStockValidation = validations.inStock(info);
 
-    console.log(info);
-
     //if infoValidation is false = 0 match with customers database, then success
     if (infoValidation === true) {
-      res.send({ status: "success" });
+      res.send({
+        status: "success",
+        givenName: givenName,
+        order: order,
+        province: province,
+      });
     } else {
       if (existsValidation === false)
         res.send({
@@ -54,10 +58,17 @@ express()
         });
     }
   })
+  // .get HTML "no frills"
+  // .get("/order-confirmed", (req, res) =>
+  //   res.sendFile(__dirname + "/public/order-confirmed.html")
+  // )
 
-  .get("/order-confirmed", (req, res) =>
-    res.sendFile(__dirname + "/public/order-confirmed.html")
-  )
+  // .get .ejs with more data
+  .get("/order-confirmed", (req, res) => {
+    console.log(req.query);
+    const { givenName, order, province } = req.query;
+    res.render("./pages/order-confirmed.ejs", { givenName, order, province });
+  })
 
   .get("*", (req, res) => res.send("Dang. 404."))
   .listen(8000, () => console.log(`Listening on port 8000`));
