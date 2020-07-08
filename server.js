@@ -56,9 +56,7 @@ express()
   })
 
   .get("/order-confirmed", (req, res) =>
-    res.sendFile(
-      "C:/Users/Marc Piantone/Documents/concordia-bootcamps/m3-4-node--http-methods/public/order-confirmed.html"
-    )
+    res.sendFile(__dirname + "/public/order-confirmed.html")
   )
 
   .get("*", (req, res) => res.send("Dang. 404."))
