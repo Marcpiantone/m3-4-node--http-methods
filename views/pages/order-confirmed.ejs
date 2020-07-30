@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="./styles.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <H1>THANKS !</H1>
-    <p><%- `Your order is confirmed, ${givenName}` %></p>
-    <p>
-      <%- `Your order of ${order} will be sent to your home in ${provinceya},
-      Canada. Thank you for participating!` %>
-    </p>
+    <div class="orderConfirmed">
+      <H1>THANKS!</H1>
+      <p><%- `Your order is confirmed, ${givenName}` %></p>
+      <p>
+        <%- `Your order of ${order} will be sent to your home in ${province},
+        Canada. Thank you for participating!` %>
+      </p>
+    </div>
   </body>
 </html>
